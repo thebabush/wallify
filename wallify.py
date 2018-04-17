@@ -13,7 +13,10 @@ import requests
 import spotipy
 import spotipy.oauth2
 
-from IPython import embed as fuck
+try:
+    from IPython import embed as fuck
+except:
+    pass
 
 
 # Poor man's config file
