@@ -5,13 +5,16 @@ Simple python script to put together a nice wallpaper from your Spotify music.
 ## Requirements
 
 * Linux
-* KDE 5 (it's easy to add support for other DEs...)
+* A recent release of KDE 5 (it's easy to add support for other DEs...)
 * DBUS and friends
-* A bunch of python packages that I still have to put in a `requirements.txt`
 
 ## Install
 
 ```sh
+# Install system-wide packages
+sudo apt install python-gi python-gi-cairo python3-gi python3-gi-cairo gir1.2-gtk-3.0
+
+# System-wide packages needed for pygobect
 virtualenv --system-site-packages -p /usr/bin/python3 /path/to/venv
 source /path/to/venv/bin/activate
 
