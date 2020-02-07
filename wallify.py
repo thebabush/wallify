@@ -19,6 +19,11 @@ except:
     pass
 
 
+WALLIFY_DIR = os.path.realpath(
+    os.path.expanduser('~/.wallify')
+)
+
+
 # Poor man's config file
 CREATE_BLACK  = True
 SCREEN_WIDTH  = 2560
@@ -49,7 +54,7 @@ class WallpaperSetter(object):
 KDE_SCRIPT = r"""
 var allDesktops = desktops();
 print (allDesktops);
-for (i=0;i<allDesktops.length;i++) {
+for (i=1;i<allDesktops.length;i++) {
     d = allDesktops[i];
     d.wallpaperPlugin = "org.kde.image";
     d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");
@@ -64,7 +69,7 @@ class KdeSetter(WallpaperSetter):
         self.tick = 0
 
     def set_wallpaper(self, path):
-        final_path = '/tmp/wallify_{}.png'.format(self.tick)
+        final_path = f'/tmp/wallify_{self.tick}.png'
         bus = pydbus.SessionBus()
         bus.autoclose = True
         plasma = bus.get('org.kde.plasmashell', '/PlasmaShell')
@@ -92,7 +97,7 @@ class Wallify(object):
         self._init_cache()
 
     def _init_cache(self):
-        self.base_path      = os.path.realpath(os.path.expanduser('~/.wallify'))
+        self.base_path      = WALLIFY_DIR
         self.cache_path     = os.path.join(self.base_path, 'cache')
         self.wallpaper_path = os.path.join(self.base_path, 'wallpaper.png')
         os.makedirs(self.base_path,  exist_ok=True)
